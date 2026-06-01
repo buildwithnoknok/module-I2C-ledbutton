@@ -3,8 +3,8 @@
 A compact I²C‑controlled button module with integrated RGB LED backlight for the noknok ecosystem.  
 Designed for user input, menu navigation, and illuminated UI feedback in modular builds.
 
-![LED Button Module Front](hardware/module-I2C-ledbutton-front.png)
-![LED Button Module Back](hardware/module-I2C-ledbutton-back.png)
+![LED Button Module Front](hardware/module-I2C-keyboardbutton-front.png)
+![LED Button Module Back](hardware/module-I2C-keyboardbutton-back.png)
 
 ---
 
@@ -36,7 +36,7 @@ Typical use cases:
 
 ## I²C Protocol
 
-**I²C address:** assigned dynamically at boot (see [Enumeration](#enumeration) below).
+**I²C address:** assigned dynamically at boot — see [Enumeration](#enumeration).
 
 ### Commands (Pico → Module)
 
@@ -60,23 +60,15 @@ Read **2 bytes**:
 
 **Byte 1 — cumulative press count** (0–255, wraps)
 
-> Edge flags (bits 1 and 2) are cleared on the module after each read. Poll faster than ~50 ms and you won't miss any press or release.
+> Edge flags (bits 1 and 2) are cleared on the module after each read. Poll at ~50 ms and you won't miss any press or release.
 
 ---
 
 ## Enumeration
 
-The LED Button uses the standard **noknok dynamic enumeration protocol**. There is no hardcoded I²C address.
+The module uses the standard noknok dynamic enumeration protocol — no hardcoded I²C address. At boot it flashes the LED white briefly, then counts a UID-derived backoff delay before joining the bus at `0x7F` for address assignment. On successful assignment, the LED flashes green.
 
-At boot, each module:
-1. Keeps I²C **off** and flashes the LED white briefly (confirms the board is alive)
-2. Calculates a unique backoff delay from its hardware UID (FNV‑1a hash, 300–2800 ms)
-3. Enables I²C at the staging address **`0x7F`**
-4. Sends a 10‑byte UID response when the Conductor reads it: `[UID × 8 bytes][0x03 = MODULE_TYPE][CRC8]`
-5. Flashes the LED green to confirm address assignment
-6. Switches to the Conductor‑assigned address and operates normally
-
-See [Ecosystem / Software Guidelines](https://github.com/buildwithnoknok/Ecosystem/blob/main/software/readme.md) for the full enumeration spec.
+**→ Full protocol spec:** [Ecosystem / software / enumeration.md](https://github.com/buildwithnoknok/Ecosystem/blob/main/software/enumeration.md)
 
 ---
 
@@ -90,7 +82,7 @@ from noknok import Conductor
 c = Conductor()        # GP8 = SDA, GP9 = SCL
 c.enumerate()          # discover all modules (~3 s)
 
-kb = c.keyboard[0]              # first LED Button by discovery order
+kb = c.ledbutton[0]             # first LED Button by discovery order
 # or: kb = c.role["ok_button"]  # by role name after setup_roles()
 
 # LED control
@@ -99,7 +91,7 @@ kb.set_color(0, 255, 0)         # green
 kb.set_color(255, 255, 255)     # white
 kb.led_off()
 
-# Button reading — returns KeyboardStatus or None on I2C error
+# Button reading — returns LedButtonStatus or None on I2C error
 s = kb.read()
 if s is not None:
     print(s.pressed)        # True if held right now
@@ -109,13 +101,6 @@ if s is not None:
 
 # Reset counter
 kb.reset_count()
-
-# Simple polling loop
-while True:
-    s = kb.read()
-    if s is not None and s.press_event:
-        print("Button pressed!")
-    time.sleep(0.05)
 ```
 
 ---
@@ -153,14 +138,6 @@ make flash  # compile + flash via WCH Link-E
 | Metric | Value |
 |--------|-------|
 | Firmware version | v1.0 |
-
-### Files
-
-| File | Description |
-|------|-------------|
-| `firmware/src/keyboard_firmware.c` | CH32V003 firmware source |
-| `firmware/src/Makefile` | Build configuration |
-| `firmware/src/funconfig.h` | ch32v003fun config |
 
 ---
 
