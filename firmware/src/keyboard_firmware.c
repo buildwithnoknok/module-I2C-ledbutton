@@ -1,6 +1,14 @@
 /*
- * noknok Keyboard Button Module Firmware  v1.0
+ * noknok Keyboard Button Module Firmware  v2.0
  * CH32V003F4U6 (QFN-20)  |  Stack: cnlohr/ch32fun
+ *
+ * ── Bootloader-hosted build (v2.0) ────────────────────────────────────────
+ *   This application runs UNDER the shared noknok I2C bootloader
+ *   (module-I2C-bootloader). It is linked at the 0x1000 flash offset (app.ld)
+ *   and reserves the top 16 bytes of RAM for the bootloader handoff cell at
+ *   0x200007F0. Command 0xB0 drops the running module back into the bootloader
+ *   so the Pico can re-flash it over I2C — no SWDIO cable. The bootloader is a
+ *   separate binary, SWD-flashed once per board; this image is flashed via I2C.
  *
  * ── Hardware ──────────────────────────────────────────────────────────────
  *   PC6  SPI1_MOSI  → SK6812MINI-E LED DIN  (DMA-driven, CPU-free)
@@ -27,6 +35,7 @@
  *     [0x00]              LED off
  *     [0x10, R, G, B, W]  Set LED colour (0-255 each channel)
  *     [0x11]              Reset cumulative press counter
+ *     [0xB0]              Enter bootloader (reset into I2C OTA flash mode)
  *   Master READ (2 bytes):
  *     Byte 0 – status flags
  *       bit 0  current button state (1 = pressed right now)
@@ -47,12 +56,21 @@
 #define MODULE_TYPE      0x03
 #define REG_ASSIGN_ADDR  0x1D
 
-#define CMD_LED_OFF      0x00
-#define CMD_LED_SET      0x10
-#define CMD_CNT_RESET    0x11
+#define CMD_LED_OFF          0x00
+#define CMD_LED_SET          0x10
+#define CMD_CNT_RESET        0x11
+#define CMD_ENTER_BOOTLOADER 0xB0   /* reset into the I2C bootloader for OTA update */
 
 #define UID_ADDR         ((volatile uint8_t*)0x1FFFF7E8)
 #define UID_LEN          8
+
+/* Bootloader handoff cell — top 16 B of RAM, reserved by app.ld (stack ends
+ * below it). Writing this magic then warm-resetting drops the module into the
+ * shared noknok I2C bootloader, which sees the magic on boot and stays in flash
+ * mode at 0x7E. SRAM survives a warm reset, so the magic is still there. Magic
+ * and address MUST match noknok_bootloader. */
+#define BL_MAGIC_CELL    (*(volatile uint32_t *)0x200007F0U)
+#define BL_MAGIC_ENTER   0x6E6B4231U   /* "nkB1" */
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * STATE
@@ -441,6 +459,14 @@ static void process_command(void)
     case CMD_CNT_RESET:
         btn_count = 0;
         break;
+
+    case CMD_ENTER_BOOTLOADER:
+        /* Over-the-wire firmware update requested by the Pico. Arm the handoff
+         * magic in no-init RAM and warm-reset; the bootloader takes over at 0x7E.
+         * NVIC_SystemReset() does not clear SRAM, so the magic survives. */
+        BL_MAGIC_CELL = BL_MAGIC_ENTER;
+        NVIC_SystemReset();
+        break;   /* not reached */
 
     default:
         break;

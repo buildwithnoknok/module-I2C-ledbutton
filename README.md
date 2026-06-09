@@ -45,6 +45,7 @@ Typical use cases:
 | `0x00` | **LED OFF** | Turn LED off immediately |
 | `0x10` `R` `G` `B` `0x00` | **SET COLOR** | Set LED colour (R, G, B each 0–255) |
 | `0x11` | **RESET COUNT** | Reset cumulative press counter to 0 |
+| `0xB0` | **ENTER BOOTLOADER** | Reset into the I²C bootloader for an over‑the‑wire firmware update (see [Firmware](#firmware)) |
 
 ### Status read (Pico ← Module)
 
@@ -125,19 +126,39 @@ kb.reset_count()
 
 ## Firmware
 
-Source is in `firmware/src/`. To build and flash, clone this repo alongside your ch32fun installation and run:
+**v2.0 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
+
+Flash map (16 KB):
+
+| Region | Address | Written by |
+|--------|---------|-----------|
+| Bootloader (4 KB) | `0x0000` | SWD, **once** at manufacture |
+| Application (this firmware) | `0x1000` | I²C OTA |
+| Metadata (validity marker) | `0x3FC0` | I²C OTA |
+
+The application is linked at the `0x1000` offset (`app.ld`) and reserves the top 16 bytes of RAM for the bootloader handoff cell. Command `0xB0` drops the running module back into the bootloader for an update.
+
+### Build
 
 ```bash
 cd firmware/src
-make        # compile
-make flash  # compile + flash via WCH Link-E
+make build   # compile the offset-linked application -> keyboard_firmware.bin
 ```
 
-> ch32fun must be installed at `../ch32fun/` relative to `firmware/src/` — see [cnlohr/ch32v003fun](https://github.com/cnlohr/ch32v003fun) for setup instructions.
+> ch32fun must be installed at `../ch32fun/` relative to `firmware/src/` — see [cnlohr/ch32v003fun](https://github.com/cnlohr/ch32v003fun) for setup.
+
+### Flashing
+
+- **Normal (over I²C):** flash `keyboard_firmware.bin` from the Pico using the noknok flasher (`module_flasher.py` in `brain-Pico`). No cable.
+- **First time / blank board:** SWD‑flash the bootloader once (`make flash` in the bootloader repo), then flash this app over I²C.
+- **Backup / recovery (SWD):** the 5‑pin SWIO header is the unbrickable backstop — see *Recovery & SWD flashing* in the [bootloader README](https://github.com/buildwithnoknok/module-I2C-bootloader#recovery--swd-flashing).
+
+`make flash` here still does a one‑off SWD flash of the app for bench bring‑up if you need it.
 
 | Metric | Value |
 |--------|-------|
-| Firmware version | v1.0 |
+| Firmware version | v2.0 (bootloader‑hosted) |
+| Application size | ~2.7 KB (of 11 KB app region) |
 
 ---
 
@@ -146,7 +167,7 @@ make flash  # compile + flash via WCH Link-E
 | Area | Status |
 |------|--------|
 | Hardware | v1.0 |
-| Firmware | **v1.0 — complete** |
+| Firmware | **v2.0 — complete (bootloader‑hosted, I²C OTA bench‑proven)** |
 | Python library | **complete** (in [Ecosystem repo](https://github.com/buildwithnoknok/Ecosystem/tree/main/software/pico)) |
 | Documentation | **complete** |
 
