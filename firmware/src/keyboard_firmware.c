@@ -1,5 +1,5 @@
 /*
- * noknok Keyboard Button Module Firmware  v2.0
+ * noknok Keyboard Button Module Firmware  v2.1
  * CH32V003F4U6 (QFN-20)  |  Stack: cnlohr/ch32fun
  *
  * ── Bootloader-hosted build (v2.0) ────────────────────────────────────────
@@ -36,12 +36,18 @@
  *     [0x10, R, G, B, W]  Set LED colour (0-255 each channel)
  *     [0x11]              Reset cumulative press counter
  *     [0xB0]              Enter bootloader (reset into I2C OTA flash mode)
- *   Master READ (2 bytes):
+ *     [0xB1]              Get version — next read returns 4 version bytes
+ *   Master READ (2 bytes, default):
  *     Byte 0 – status flags
  *       bit 0  current button state (1 = pressed right now)
  *       bit 1  press edge since last read  (cleared on read)
  *       bit 2  release edge since last read (cleared on read)
  *     Byte 1 – cumulative press count (wraps at 255)
+ *   Master READ (4 bytes, after 0xB1):
+ *     [PROTOCOL_VER, FW_MAJOR, FW_MINOR, FW_PATCH]
+ *
+ *   GET_VERSION (0xB1) is a noknok ecosystem-standard command (range
+ *   0xB0–0xBF reserved). See Ecosystem/software/readme.md §5.
  */
 
 #include "ch32fun.h"
@@ -60,9 +66,20 @@
 #define CMD_LED_SET          0x10
 #define CMD_CNT_RESET        0x11
 #define CMD_ENTER_BOOTLOADER 0xB0   /* reset into the I2C bootloader for OTA update */
+#define CMD_GET_VERSION      0xB1   /* report [PROTOCOL_VERSION, FW_MAJOR, FW_MINOR, FW_PATCH] */
 
 #define UID_ADDR         ((volatile uint8_t*)0x1FFFF7E8)
 #define UID_LEN          8
+
+/* ── Version reporting (noknok standard command, DEV-1) ──────────────────────
+ * PROTOCOL_VERSION = which noknok protocol/API this module speaks — NOT the
+ * firmware version. Bumped only when the shared protocol changes. The
+ * FW_VERSION_* triple is this module's firmware semver; keep it equal to the
+ * release tag. Reported on a GET_VERSION (0xB1) read. */
+#define PROTOCOL_VERSION 0x01
+#define FW_VERSION_MAJOR 2
+#define FW_VERSION_MINOR 1
+#define FW_VERSION_PATCH 0
 
 /* Bootloader handoff cell — top 16 B of RAM, reserved by app.ld (stack ends
  * below it). Writing this magic then warm-resetting drops the module into the
@@ -86,6 +103,7 @@ typedef enum {
 static volatile DeviceState dev_state = DEV_BOOT_WAITING;
 static volatile uint32_t    ms_tick   = 0;
 static volatile uint8_t     new_addr  = 0;
+static volatile uint8_t     version_pending = 0; /* set in ISR on 0xB1; next read returns version */
 
 /* ─── Button ─────────────────────────────────────────────────────────────── */
 static volatile uint8_t btn_state    = 0;   /* 1 = currently pressed */
@@ -166,6 +184,17 @@ static void build_uid_response(void)
     tx_buf[8] = MODULE_TYPE;
     tx_buf[9] = crc8((const uint8_t*)tx_buf, 9);
     tx_len = 10;
+    tx_idx = 0;
+}
+
+/* 4-byte GET_VERSION response: [PROTOCOL_VERSION, FW_MAJOR, FW_MINOR, FW_PATCH] */
+static void build_version_response(void)
+{
+    tx_buf[0] = PROTOCOL_VERSION;
+    tx_buf[1] = FW_VERSION_MAJOR;
+    tx_buf[2] = FW_VERSION_MINOR;
+    tx_buf[3] = FW_VERSION_PATCH;
+    tx_len = 4;
     tx_idx = 0;
 }
 
@@ -377,6 +406,11 @@ void I2C1_EV_IRQHandler(void)
             if (dev_state == DEV_ENUM_READY) {
                 build_uid_response();
                 I2C1->DATAR = tx_buf[tx_idx++];
+            } else if (version_pending) {
+                /* Previous write was GET_VERSION → return the 4 version bytes */
+                version_pending = 0;
+                build_version_response();
+                I2C1->DATAR = tx_buf[tx_idx++];
             } else {
                 /* Byte 0: status flags.  Byte 1: press count. */
                 tx_buf[0] = (uint8_t)(btn_state
@@ -415,7 +449,12 @@ void I2C1_EV_IRQHandler(void)
                 dev_state = DEV_ASSIGNING;
             }
         } else if (dev_state == DEV_ASSIGNED) {
-            if (rx_len > 0) cmd_ready = 1;
+            /* GET_VERSION is handled entirely in the ISR: latch it so the next
+             * read returns the version bytes. Don't route it to the main loop. */
+            if (rx_len == 1 && rx_buf[0] == CMD_GET_VERSION)
+                version_pending = 1;
+            else if (rx_len > 0)
+                cmd_ready = 1;
         }
 
         I2C1->CTLR1 |= I2C_CTLR1_ACK;

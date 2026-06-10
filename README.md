@@ -46,6 +46,11 @@ Typical use cases:
 | `0x10` `R` `G` `B` `0x00` | **SET COLOR** | Set LED colour (R, G, B each 0–255) |
 | `0x11` | **RESET COUNT** | Reset cumulative press counter to 0 |
 | `0xB0` | **ENTER BOOTLOADER** | Reset into the I²C bootloader for an over‑the‑wire firmware update (see [Firmware](#firmware)) |
+| `0xB1` | **GET VERSION** | Standard noknok command — the next read returns 4 version bytes (see below) |
+
+### Version read (Pico ← Module)
+
+`GET_VERSION` (`0xB1`) is a **noknok ecosystem-standard** command (the `0xB0`–`0xBF` range is reserved for standard commands across every module). Write `0xB1`, then read **4 bytes**: `[PROTOCOL_VERSION, FW_MAJOR, FW_MINOR, FW_PATCH]` = `[0x01, 2, 1, 0]`. Lets the Conductor compare the installed version against the version required by the product manifest. **→ Full spec:** [Ecosystem / software / readme.md §5](https://github.com/buildwithnoknok/Ecosystem/blob/main/software/readme.md#5-standard-system-commands)
 
 ### Status read (Pico ← Module)
 
@@ -126,7 +131,7 @@ kb.reset_count()
 
 ## Firmware
 
-**v2.0 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
+**v2.1 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
 
 Flash map (16 KB):
 
@@ -157,7 +162,7 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 
 | Metric | Value |
 |--------|-------|
-| Firmware version | v2.0 (bootloader‑hosted) |
+| Firmware version | v2.1 (bootloader‑hosted) |
 | Application size | ~2.7 KB (of 11 KB app region) |
 
 ---
@@ -167,7 +172,7 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 | Area | Status |
 |------|--------|
 | Hardware | v1.0 |
-| Firmware | **v2.0 — complete (bootloader‑hosted, I²C OTA bench‑proven)** |
+| Firmware | **v2.1 — complete (bootloader‑hosted, I²C OTA bench‑proven)** |
 | Python library | **complete** (in [Ecosystem repo](https://github.com/buildwithnoknok/Ecosystem/tree/main/software/pico)) |
 | Documentation | **complete** |
 
