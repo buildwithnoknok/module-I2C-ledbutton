@@ -3,8 +3,8 @@
 A compact I²C‑controlled button module with integrated RGB LED backlight for the noknok ecosystem.  
 Designed for user input, menu navigation, and illuminated UI feedback in modular builds.
 
-![LED Button Module Front](hardware/module-I2C-keyboardbutton-front.png)
-![LED Button Module Back](hardware/module-I2C-keyboardbutton-back.png)
+![LED Button Module Front](hardware/module-I2C-ledbutton-front.png)
+![LED Button Module Back](hardware/module-I2C-ledbutton-back.png)
 
 ---
 
