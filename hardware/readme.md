@@ -17,5 +17,4 @@ Hardware is licensed CC BY-SA 4.0 (see `../LICENSE-hardware`). Connector, flashi
 - **Optional custom-button thru-holes** — two thru-hole pads wired in parallel with the on-board tactile switch (button input net / GND), left unpopulated, so a user can solder their own button via wires.
 - **Removed the castellated edge pads** — both the I2C edge and the flashing edge (unreliable to contact). I2C is via the JST-SH (Qwiic) connectors.
 - **noknok custom footprints** — introduced the noknok M2.5 mounting holes and the noknok flashing pads (M2.5 keyed mounting hole + 3 pogo pads: VCC, SWIO, GND), from the noknok KiCad library in the Ecosystem repo.
-
-> Deferred: lowering the I2C pull-ups (currently 10 kΩ on-module) is on hold pending the ecosystem decision to move pull-ups to the host (Conductor) rather than stacking them per module.
+- **Removed the on-board I²C pull-up resistors** — pull-ups now live on the host (Conductor), not per module (avoids stacking on the shared bus). The host must provide the bus pull-ups (proposed 3.3 kΩ); a noknok pull-up PCB covers third-party hosts that lack them. See the [I²C Pull-up Resistor Strategy ADR](https://noknokdev.atlassian.net/wiki/spaces/SD/pages/82280449).
