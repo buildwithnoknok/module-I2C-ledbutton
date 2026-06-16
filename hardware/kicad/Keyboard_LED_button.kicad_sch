@@ -5,9 +5,9 @@
 	(uuid "89ac1937-28eb-4c0f-a201-5c0292dd68d3")
 	(paper "A4")
 	(title_block
-		(title "Keyboard Button on CHV32003J4M6")
-		(date "2026-01-11")
-		(rev "0.8")
+		(title "LED Button on CHV32003J4M6")
+		(date "2026-06-16")
+		(rev "2.0")
 		(company "https://noknok.app")
 	)
 	(lib_symbols
@@ -675,6 +675,207 @@
 				)
 			)
 			(symbol "D_Zener_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:LED"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LED"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Light emitting diode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "LED diode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "LED_0_1"
+				(polyline
+					(pts
+						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -1.27) (xy -1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "LED_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 2.54)
@@ -1890,105 +2091,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Mechanical:MountingHole"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim no)
-			(in_bom no)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "H"
-				(at 0 5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "MountingHole"
-				(at 0 3.175 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Mounting Hole without connection"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "mounting hole"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "MountingHole*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "MountingHole_0_1"
-				(circle
-					(center 0 0)
-					(radius 1.27)
-					(stroke
-						(width 1.27)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Regulator_Switching:LGS6302B5"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2341,17 +2443,17 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "noknok_KiCad_Symbol_Library:Castellated_Edge_4pin_Qwiic_StemmaQT-I2C"
+		(symbol "noknok:noknok_FlashPads_I2C-module"
 			(pin_names
 				(offset 1.016)
 			)
 			(exclude_from_sim no)
-			(in_bom yes)
+			(in_bom no)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "J"
-				(at 0 6.604 0)
+				(at -10.16 5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -2360,8 +2462,8 @@
 					)
 				)
 			)
-			(property "Value" "Castellated_Edge_4pin_Qwiic_StemmaQT-I2C"
-				(at 1.4217 -6.3482 0)
+			(property "Value" "noknok_FlashPads_I2C-module"
+				(at 1.905 -6.35 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -2370,7 +2472,7 @@
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "noknok:noknok_FlashPads_I2C-module_1x3_M2.5"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2392,7 +2494,7 @@
 					)
 				)
 			)
-			(property "Description" ""
+			(property "Description" "noknok pogo flashing interface for CH32V003 I2C modules (single-wire SWD). 3 pads: 1=GND, 2=SWIO, 3=VCC. NOTE: the footprint INCLUDES an M2.5 mounting hole that fixes the hole-to-pad spacing and acts as the pogo-clamp orientation key. Bottom-side pads (flip footprint to B.Cu). Place the hole >=3mm from the board edge."
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2403,21 +2505,53 @@
 					)
 				)
 			)
-			(symbol "Castellated_Edge_4pin_Qwiic_StemmaQT-I2C_1_1"
+			(property "ki_keywords" "noknok flash pogo SWIO CH32V003 I2C programming"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "noknok_FlashPads_I2C-module*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "noknok_FlashPads_I2C-module_0_1"
 				(rectangle
-					(start 0 5.08)
-					(end 6.35 -5.08)
+					(start -5.08 3.81)
+					(end 8.89 -3.81)
 					(stroke
-						(width 0)
-						(type solid)
+						(width 0.254)
+						(type default)
 					)
 					(fill
 						(type background)
 					)
 				)
+				(text "Footprint incl. M2.5 mounting hole"
+					(at 1.905 -4.95 0)
+					(effects
+						(font
+							(size 0.7 0.7)
+						)
+					)
+				)
+			)
+			(symbol "noknok_FlashPads_I2C-module_1_1"
 				(pin passive line
-					(at -2.54 3.81 0)
-					(length 2.54)
+					(at -10.16 2.54 0)
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -2434,9 +2568,9 @@
 					)
 				)
 				(pin passive line
-					(at -2.54 1.27 0)
-					(length 2.54)
-					(name "VCC"
+					(at -10.16 0 0)
+					(length 5.08)
+					(name "SWIO"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2451,10 +2585,10 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at -2.54 -1.27 0)
-					(length 2.54)
-					(name "SDA"
+				(pin passive line
+					(at -10.16 -2.54 0)
+					(length 5.08)
+					(name "VCC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2462,24 +2596,6 @@
 						)
 					)
 					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -2.54 -3.81 0)
-					(length 2.54)
-					(name "SCL"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2490,17 +2606,17 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "noknok_KiCad_Symbol_Library:Castellated_Edge_5pin_Firmware"
+		(symbol "noknok:noknok_MountingHole"
 			(pin_names
 				(offset 1.016)
 			)
 			(exclude_from_sim no)
-			(in_bom yes)
+			(in_bom no)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 0 7.62 0)
+			(property "Reference" "H"
+				(at 0 5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -2509,8 +2625,8 @@
 					)
 				)
 			)
-			(property "Value" "Castellated_Edge_5pin_Firmware"
-				(at -3.556 5.08 0)
+			(property "Value" "noknok_MountingHole"
+				(at 0 3.175 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -2519,7 +2635,7 @@
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "noknok:noknok_MountingHole_2.5mm_M2.5"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2541,7 +2657,7 @@
 					)
 				)
 			)
-			(property "Description" ""
+			(property "Description" "noknok standard M2.5 mounting hole (Ø2.5mm NPTH, no annular). Pairs with footprint noknok_MountingHole_2.5mm_M2.5. The plain second mounting hole; the first hole on the board carries the flashing pads (noknok_FlashPads_I2C-module)."
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2552,108 +2668,38 @@
 					)
 				)
 			)
-			(symbol "Castellated_Edge_5pin_Firmware_0_1"
-				(rectangle
-					(start -5.08 3.81)
-					(end 1.27 -8.89)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
+			(property "ki_keywords" "noknok mounting hole M2.5"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
 				)
 			)
-			(symbol "Castellated_Edge_5pin_Firmware_1_1"
-				(pin no_connect line
-					(at -7.62 -7.62 0)
-					(length 2.54)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
+			(property "ki_fp_filters" "noknok_MountingHole*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
 				)
-				(pin passive line
-					(at -7.62 -5.08 0)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
+			)
+			(symbol "noknok_MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
 					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -7.62 -2.54 0)
-					(length 2.54)
-					(name "SWIO"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 0 0)
-					(length 2.54)
-					(name "RST"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -7.62 2.54 0)
-					(length 2.54)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
+					(fill
+						(type none)
 					)
 				)
 			)
@@ -3030,8 +3076,8 @@
 		)
 	)
 	(rectangle
-		(start 130.81 57.15)
-		(end 143.51 93.98)
+		(start 128.27 57.15)
+		(end 151.13 93.98)
 		(stroke
 			(width 0)
 			(type dot)
@@ -3079,7 +3125,7 @@
 	)
 	(rectangle
 		(start 215.9 92.71)
-		(end 260.35 125.73)
+		(end 260.35 120.65)
 		(stroke
 			(width 0)
 			(type dot)
@@ -3102,6 +3148,18 @@
 		(uuid "8539c3bf-82b4-42a7-b23d-da5bf7f7d5f4")
 	)
 	(rectangle
+		(start 186.69 101.6)
+		(end 214.63 129.54)
+		(stroke
+			(width 0)
+			(type dot)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "ad4f741e-fe12-47c1-81c3-d7af27be3495")
+	)
+	(rectangle
 		(start 144.78 125.73)
 		(end 130.81 139.7)
 		(stroke
@@ -3114,8 +3172,8 @@
 		(uuid "bc114b12-67a0-4447-8ae0-8338c87fe334")
 	)
 	(rectangle
-		(start 260.35 130.81)
-		(end 215.9 156.21)
+		(start 215.9 121.92)
+		(end 260.35 146.05)
 		(stroke
 			(width 0)
 			(type dot)
@@ -3127,7 +3185,7 @@
 	)
 	(rectangle
 		(start 16.51 77.47)
-		(end 59.69 119.38)
+		(end 48.26 119.38)
 		(stroke
 			(width 0)
 			(type dot)
@@ -3147,6 +3205,16 @@
 			(justify left)
 		)
 		(uuid "02cdf81c-4b66-400f-801e-47ef8d87311e")
+	)
+	(text "if module based\npull-ups are required\nadd e.g. 10k Ohm\nfrom 3.3V-prot to SDA\nand 10k Ohm to SCL."
+		(exclude_from_sim no)
+		(at 139.446 74.422 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "2086f5ff-0536-4840-88ae-cfc5649e37db")
 	)
 	(text "Avoid voltage\novershoot when\ninserting power"
 		(exclude_from_sim no)
@@ -3170,7 +3238,7 @@
 		)
 		(uuid "2b5eba49-5bd3-46ff-898b-9ee980da23db")
 	)
-	(text "Keyboard Button + RGB LED"
+	(text "noknok LED Button V2.0"
 		(exclude_from_sim no)
 		(at 281.432 17.526 0)
 		(effects
@@ -3194,16 +3262,26 @@
 		)
 		(uuid "5073a86c-7e7a-4e01-afd1-425fd32cde3d")
 	)
-	(text "Pull-up\nResistors\nfor I2C"
+	(text "no Pull-up Resistors\nfor I2C, as they are\nentirely on the host"
 		(exclude_from_sim no)
-		(at 133.604 62.484 0)
+		(at 140.208 61.468 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
 		)
 		(uuid "80108e2a-5fd3-4107-a65b-0c586d14e3c1")
+	)
+	(text "Status\nIndicator\nLED"
+		(exclude_from_sim no)
+		(at 212.344 106.426 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b020b964-bfaf-4bbe-b375-e5521e461ec5")
 	)
 	(text "Firmware\nFlashing"
 		(exclude_from_sim no)
@@ -3228,7 +3306,7 @@
 	)
 	(text "Qwiic / Stemma QT\nConnectors"
 		(exclude_from_sim no)
-		(at 17.78 81.026 0)
+		(at 18.288 82.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3250,7 +3328,7 @@
 	)
 	(text "Keyboard Switch (MX-compatible)\n(no 1N4148W needed\nonly one keycap ->\nno ghosting)"
 		(exclude_from_sim no)
-		(at 259.334 136.144 0)
+		(at 259.334 127.508 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3277,6 +3355,12 @@
 		(uuid "0188d8b3-2068-4414-a37d-c9db3ea3e584")
 	)
 	(junction
+		(at 189.23 100.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0ef265f8-a394-4555-8255-8631e79f7e3b")
+	)
+	(junction
 		(at 97.79 135.89)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3289,10 +3373,10 @@
 		(uuid "319b09ee-4d6c-4a0e-8362-30b570b72e37")
 	)
 	(junction
-		(at 40.64 100.33)
+		(at 41.91 100.33)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "398844ea-fe75-4112-bf31-838d32b87909")
+		(uuid "39fa4d5b-5ba7-4df4-a291-95e31b8242dc")
 	)
 	(junction
 		(at 185.42 44.45)
@@ -3301,22 +3385,16 @@
 		(uuid "3abe2027-6e22-4b2d-8abf-19949acfb38e")
 	)
 	(junction
-		(at 133.35 66.04)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3f572cf3-cd15-4309-a463-e6c2a8de0da3")
-	)
-	(junction
 		(at 236.22 68.58)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4aa00dbb-9b17-4abc-9e2a-7f031acb70b1")
 	)
 	(junction
-		(at 40.64 97.79)
+		(at 41.91 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "57143196-7457-46fb-b3ed-efff60f609bf")
+		(uuid "4bc30d44-143e-4cec-9420-18e447000d5a")
 	)
 	(junction
 		(at 209.55 81.28)
@@ -3329,12 +3407,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5d2e0186-dd04-4562-b193-56c965483170")
-	)
-	(junction
-		(at 54.61 102.87)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5efb2499-54af-4088-a724-68f7a3ae5a40")
 	)
 	(junction
 		(at 191.77 58.42)
@@ -3361,10 +3433,10 @@
 		(uuid "643ae81f-c1e3-450f-b2d4-738eb582dd2e")
 	)
 	(junction
-		(at 54.61 100.33)
+		(at 41.91 97.79)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "67a12b97-7bcc-4a18-ba2f-427d8243ef4e")
+		(uuid "6830b3ba-3bb6-466e-91d4-160f16a15bcf")
 	)
 	(junction
 		(at 185.42 58.42)
@@ -3385,12 +3457,6 @@
 		(uuid "9742df75-85a5-490c-bc7f-85bb2decf7a6")
 	)
 	(junction
-		(at 54.61 105.41)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "97a196e7-7a55-4ac7-b784-cc750723c7fe")
-	)
-	(junction
 		(at 106.68 135.89)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3403,22 +3469,16 @@
 		(uuid "9c356b41-d9f7-425c-b6fd-82b090347a42")
 	)
 	(junction
-		(at 40.64 102.87)
+		(at 41.91 105.41)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9c9fab4e-d966-46a1-bcf7-79ca6b9747ba")
+		(uuid "a0227fb3-b759-423b-b391-ca7d22a88c90")
 	)
 	(junction
 		(at 63.5 66.04)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a31efbc2-192d-4d35-b35a-5e2f94887bf1")
-	)
-	(junction
-		(at 133.35 97.79)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ac29162f-82da-4aec-99f3-d9df058a6def")
 	)
 	(junction
 		(at 236.22 58.42)
@@ -3445,34 +3505,10 @@
 		(uuid "b8b187fa-d75f-47ff-8aa4-7af4c868bb7d")
 	)
 	(junction
-		(at 140.97 66.04)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c2640cca-0238-47d6-acad-18628dfa498c")
-	)
-	(junction
-		(at 54.61 97.79)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "cef493bb-12b6-4581-8f1c-5e9765b59267")
-	)
-	(junction
-		(at 140.97 100.33)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d045df68-2cab-434a-9671-2e36c9c89a24")
-	)
-	(junction
 		(at 191.77 81.28)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d46a1984-5a1b-4adc-8720-1550033166fb")
-	)
-	(junction
-		(at 40.64 105.41)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d5a50ba5-e871-4830-a3ef-9a83a2cc9547")
 	)
 	(junction
 		(at 87.63 135.89)
@@ -3491,10 +3527,6 @@
 	(no_connect
 		(at 177.8 110.49)
 		(uuid "3b471a65-17cc-4939-8ce1-60abd4379802")
-	)
-	(no_connect
-		(at 242.57 105.41)
-		(uuid "3ce2424f-9602-446e-b8f5-3e2722e21993")
 	)
 	(no_connect
 		(at 177.8 105.41)
@@ -3562,16 +3594,6 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 100.33) (xy 157.48 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "07270948-eb91-44e4-8eba-e50b98a668ea")
-	)
-	(wire
-		(pts
 			(xy 148.59 113.03) (xy 157.48 113.03)
 		)
 		(stroke
@@ -3612,26 +3634,6 @@
 	)
 	(wire
 		(pts
-			(xy 242.57 110.49) (xy 224.79 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0f0e4d4b-2b6f-4bac-9e4d-85fccc6aae4f")
-	)
-	(wire
-		(pts
-			(xy 54.61 105.41) (xy 57.15 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1338a14b-0ad9-4530-9b8d-a7e18ebd8045")
-	)
-	(wire
-		(pts
 			(xy 121.92 151.13) (xy 114.3 151.13)
 		)
 		(stroke
@@ -3659,6 +3661,16 @@
 			(type default)
 		)
 		(uuid "1585b9d0-8832-46c2-903e-8fe388e78c35")
+	)
+	(wire
+		(pts
+			(xy 234.95 104.14) (xy 224.79 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17b99e7d-3f5f-48d4-b201-b2e282edf3d4")
 	)
 	(wire
 		(pts
@@ -3702,13 +3714,13 @@
 	)
 	(wire
 		(pts
-			(xy 54.61 97.79) (xy 133.35 97.79)
+			(xy 189.23 100.33) (xy 218.44 100.33)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "273dc1ed-997f-48f5-a275-5b7edc3636d6")
+		(uuid "25b0fc73-7bba-436e-a700-7426122722a9")
 	)
 	(wire
 		(pts
@@ -3722,7 +3734,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 100.33) (xy 218.44 100.33)
+			(xy 177.8 100.33) (xy 189.23 100.33)
 		)
 		(stroke
 			(width 0)
@@ -3772,16 +3784,6 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 97.79) (xy 40.64 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "376212d5-22fa-4e74-99f7-832a595ecfa2")
-	)
-	(wire
-		(pts
 			(xy 86.36 66.04) (xy 96.52 66.04)
 		)
 		(stroke
@@ -3792,7 +3794,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 105.41) (xy 54.61 105.41)
+			(xy 27.94 105.41) (xy 41.91 105.41)
 		)
 		(stroke
 			(width 0)
@@ -3802,7 +3804,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 97.79) (xy 54.61 97.79)
+			(xy 27.94 97.79) (xy 41.91 97.79)
 		)
 		(stroke
 			(width 0)
@@ -3882,7 +3884,7 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 105.41) (xy 57.15 110.49)
+			(xy 44.45 105.41) (xy 44.45 110.49)
 		)
 		(stroke
 			(width 0)
@@ -3922,7 +3924,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 102.87) (xy 54.61 102.87)
+			(xy 27.94 102.87) (xy 41.91 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3932,13 +3934,13 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 81.28) (xy 140.97 100.33)
+			(xy 189.23 125.73) (xy 189.23 100.33)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "522e9bee-d84a-493d-8df3-d8407322cece")
+		(uuid "50474975-4c5d-4e81-b1db-aa99d11a48f2")
 	)
 	(wire
 		(pts
@@ -3959,26 +3961,6 @@
 			(type default)
 		)
 		(uuid "5498e507-36ce-4755-9d99-eb25da7f9856")
-	)
-	(wire
-		(pts
-			(xy 30.48 102.87) (xy 40.64 102.87)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "581b30b6-7b88-41cb-a187-9d82d3bd84bf")
-	)
-	(wire
-		(pts
-			(xy 133.35 66.04) (xy 133.35 73.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5ee8fe24-4d73-43c9-ab06-60a133988394")
 	)
 	(wire
 		(pts
@@ -4012,16 +3994,6 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 107.95) (xy 208.28 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "685bf81b-f667-43ff-a93a-866f1610d5df")
-	)
-	(wire
-		(pts
 			(xy 114.3 66.04) (xy 114.3 71.12)
 		)
 		(stroke
@@ -4042,13 +4014,13 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 100.33) (xy 40.64 100.33)
+			(xy 181.61 107.95) (xy 181.61 135.89)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6ea03833-93a2-46e6-a4fc-ab2e034db4ab")
+		(uuid "6d5a80c6-d078-437c-ae01-d94b84dea8dd")
 	)
 	(wire
 		(pts
@@ -4082,16 +4054,6 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 144.78) (xy 234.95 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7d6c563f-e54e-442f-8ea7-ee3778631e3d")
-	)
-	(wire
-		(pts
 			(xy 222.25 58.42) (xy 219.71 58.42)
 		)
 		(stroke
@@ -4109,16 +4071,6 @@
 			(type default)
 		)
 		(uuid "823a1e0a-e836-4fbc-8ea0-5d18a2075fa9")
-	)
-	(wire
-		(pts
-			(xy 218.44 100.33) (xy 218.44 107.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "82754447-73c3-4182-99f8-c5e712012eb6")
 	)
 	(wire
 		(pts
@@ -4162,36 +4114,6 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 144.78) (xy 218.44 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8a263bd3-9df0-4f0c-b21b-4fd87cfd4461")
-	)
-	(wire
-		(pts
-			(xy 140.97 66.04) (xy 167.64 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8c86378c-bfd5-4635-98c3-a03aed1e3318")
-	)
-	(wire
-		(pts
-			(xy 54.61 100.33) (xy 140.97 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8cbbb995-66df-4b2f-850a-1875d1bacfd2")
-	)
-	(wire
-		(pts
 			(xy 199.39 63.5) (xy 196.85 63.5)
 		)
 		(stroke
@@ -4199,16 +4121,6 @@
 			(type default)
 		)
 		(uuid "8fd2d1b4-ea48-4c13-afca-6965784c441f")
-	)
-	(wire
-		(pts
-			(xy 218.44 107.95) (xy 242.57 107.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "906cbbf1-d480-47fa-8aff-4d51587a1ec6")
 	)
 	(wire
 		(pts
@@ -4229,6 +4141,26 @@
 			(type default)
 		)
 		(uuid "90de9929-d29d-4b00-869c-fec81f0ccc2e")
+	)
+	(wire
+		(pts
+			(xy 224.79 109.22) (xy 224.79 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91b08d4c-beb0-4252-88d2-0a95c226f954")
+	)
+	(wire
+		(pts
+			(xy 218.44 106.68) (xy 234.95 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9280c583-1a3c-4906-be5c-58d0be7735cf")
 	)
 	(wire
 		(pts
@@ -4262,6 +4194,16 @@
 	)
 	(wire
 		(pts
+			(xy 41.91 105.41) (xy 44.45 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a04c2b9b-e8db-4f60-b8c5-1cb7cb6e924b")
+	)
+	(wire
+		(pts
 			(xy 148.59 135.89) (xy 140.97 135.89)
 		)
 		(stroke
@@ -4269,6 +4211,16 @@
 			(type default)
 		)
 		(uuid "a0e9be71-3c7c-4e3c-866b-976707d2e7b8")
+	)
+	(wire
+		(pts
+			(xy 41.91 102.87) (xy 63.5 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a170bee4-a449-4861-a847-4ead1a6a8594")
 	)
 	(wire
 		(pts
@@ -4282,6 +4234,16 @@
 	)
 	(wire
 		(pts
+			(xy 181.61 135.89) (xy 224.79 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2b18f24-e4e4-40cc-918e-6def4f96ea10")
+	)
+	(wire
+		(pts
 			(xy 107.95 83.82) (xy 110.434 83.82)
 		)
 		(stroke
@@ -4292,13 +4254,13 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 107.95) (xy 208.28 107.95)
+			(xy 177.8 107.95) (xy 181.61 107.95)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "aa923a38-05b0-4d64-a14b-9dc1098b773d")
+		(uuid "ab95a714-e6a3-41b0-bb76-f0271e663664")
 	)
 	(wire
 		(pts
@@ -4312,17 +4274,17 @@
 	)
 	(wire
 		(pts
-			(xy 54.61 102.87) (xy 63.5 102.87)
+			(xy 195.58 125.73) (xy 189.23 125.73)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "aec61c0c-1402-40f8-8c52-1e0b29cf45e0")
+		(uuid "ac1d05f4-6bbf-4647-83e7-b05212503385")
 	)
 	(wire
 		(pts
-			(xy 40.64 100.33) (xy 54.61 100.33)
+			(xy 27.94 100.33) (xy 41.91 100.33)
 		)
 		(stroke
 			(width 0)
@@ -4342,6 +4304,36 @@
 	)
 	(wire
 		(pts
+			(xy 41.91 100.33) (xy 157.48 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b48e8545-bb51-4e29-9dec-eb0d3c4c28f4")
+	)
+	(wire
+		(pts
+			(xy 207.01 125.73) (xy 203.2 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b7601879-6d26-44b8-b43f-71d4c0d4d1d6")
+	)
+	(wire
+		(pts
+			(xy 218.44 100.33) (xy 218.44 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b89da8c6-ecba-4599-91d9-baa39f2e3b88")
+	)
+	(wire
+		(pts
 			(xy 110.434 83.82) (xy 114.3 83.82)
 		)
 		(stroke
@@ -4352,27 +4344,27 @@
 	)
 	(wire
 		(pts
-			(xy 242.57 102.87) (xy 226.06 102.87)
+			(xy 41.91 97.79) (xy 133.35 97.79)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c4541f00-2642-4f1f-a201-685e715f6b9b")
+		(uuid "bc866670-7f19-451d-9b46-b95cba68ca78")
 	)
 	(wire
 		(pts
-			(xy 224.79 110.49) (xy 224.79 116.84)
+			(xy 207.01 115.57) (xy 207.01 116.84)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c81b991e-d234-4089-a62f-956ca08a7d0a")
+		(uuid "c8723b1a-4ba8-4443-9d90-e686f5e55c4f")
 	)
 	(wire
 		(pts
-			(xy 133.35 66.04) (xy 140.97 66.04)
+			(xy 114.3 66.04) (xy 167.64 66.04)
 		)
 		(stroke
 			(width 0)
@@ -4392,13 +4384,13 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 105.41) (xy 40.64 105.41)
+			(xy 224.79 109.22) (xy 234.95 109.22)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d0a69b1b-a0a4-402e-b13b-9340b2e62e87")
+		(uuid "d0e30234-ed31-4ad1-921c-3270857fd41a")
 	)
 	(wire
 		(pts
@@ -4429,6 +4421,16 @@
 			(type default)
 		)
 		(uuid "d752738c-e64c-4d0b-af96-fee14aecdba9")
+	)
+	(wire
+		(pts
+			(xy 207.01 124.46) (xy 207.01 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d97adcd1-70ef-4339-b466-d340ce6aa5d5")
 	)
 	(wire
 		(pts
@@ -4472,16 +4474,6 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 66.04) (xy 140.97 73.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e0cf75de-c6cd-4e2c-93f2-d4f83907aa5d")
-	)
-	(wire
-		(pts
 			(xy 167.64 128.27) (xy 167.64 133.35)
 		)
 		(stroke
@@ -4489,6 +4481,16 @@
 			(type default)
 		)
 		(uuid "e592ddd4-135a-4671-99b8-cdd9086248b8")
+	)
+	(wire
+		(pts
+			(xy 252.73 135.89) (xy 252.73 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5bbc595-4207-4f42-9a8b-d3c1c7640d03")
 	)
 	(wire
 		(pts
@@ -4502,16 +4504,6 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 66.04) (xy 133.35 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f12d2cf3-f040-4324-83e4-5760ae6dd065")
-	)
-	(wire
-		(pts
 			(xy 233.68 58.42) (xy 236.22 58.42)
 		)
 		(stroke
@@ -4522,7 +4514,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 144.78) (xy 234.95 144.78)
+			(xy 234.95 135.89) (xy 252.73 135.89)
 		)
 		(stroke
 			(width 0)
@@ -4572,13 +4564,13 @@
 	)
 	(wire
 		(pts
-			(xy 226.06 102.87) (xy 226.06 100.33)
+			(xy 224.79 104.14) (xy 224.79 100.33)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f97b5f96-9509-47dc-bfda-a7a7a1a32f3e")
+		(uuid "f6b1bb08-4f67-4412-bc46-2971b5569818")
 	)
 	(wire
 		(pts
@@ -4589,16 +4581,6 @@
 			(type default)
 		)
 		(uuid "fae3434b-514e-4176-aa20-8a9946326e88")
-	)
-	(wire
-		(pts
-			(xy 133.35 81.28) (xy 133.35 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fbcb55ba-249d-4c91-996a-0b6c3284a280")
 	)
 	(image
 		(at 69.85 39.37)
@@ -8369,93 +8351,8 @@
 		(uuid "f641cf4d-46ed-4b03-8986-d38fdd5a52a8")
 	)
 	(symbol
-		(lib_id "noknok_KiCad_Symbol_Library:Castellated_Edge_4pin_Qwiic_StemmaQT-I2C")
-		(at 27.94 101.6 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "0de04e3c-5d9b-4551-b1c7-376a72d8704e")
-		(property "Reference" "J3"
-			(at 24.892 94.488 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Castellated_Edge_4pin_Qwiic_StemmaQT-I2C"
-			(at 19.558 104.902 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Chris_Library:Castellated_edge_pad_I2C_4pin"
-			(at 27.94 101.6 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 27.94 101.6 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 27.94 101.6 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ad33ccee-c174-4a09-bbce-94ef736bd4af")
-		)
-		(pin "4"
-			(uuid "0e51a46c-631f-499c-b17f-89d61ecaa2dd")
-		)
-		(pin "2"
-			(uuid "0df53f69-1416-4e89-91a1-98d69742b976")
-		)
-		(pin "3"
-			(uuid "5c9a7095-73b4-45da-b7f7-c8a4c419027d")
-		)
-		(instances
-			(project "Keyboard_LED_button"
-				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "J3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
-		(at 234.95 147.32 0)
+		(at 252.73 138.43 0)
 		(mirror y)
 		(unit 1)
 		(body_style 1)
@@ -8467,7 +8364,7 @@
 		(fields_autoplaced yes)
 		(uuid "1e86d5be-83ab-4ac1-9729-914a44369e6f")
 		(property "Reference" "#PWR09"
-			(at 234.95 153.67 0)
+			(at 252.73 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8478,7 +8375,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 234.95 152.4 0)
+			(at 252.73 143.51 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8488,7 +8385,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 234.95 147.32 0)
+			(at 252.73 138.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8499,7 +8396,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 234.95 147.32 0)
+			(at 252.73 138.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8510,7 +8407,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 234.95 147.32 0)
+			(at 252.73 138.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8527,87 +8424,6 @@
 			(project "Keyboard_LED_button"
 				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
 					(reference "#PWR09")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 140.97 77.47 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "27113af6-2c41-4db5-a745-3b9ae0b4b943")
-		(property "Reference" "R2"
-			(at 136.652 78.994 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10k"
-			(at 136.652 81.534 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 139.192 77.47 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 77.47 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 140.97 77.47 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "c7540d88-da3e-46d3-b219-ff0c2a8c2186")
-		)
-		(pin "1"
-			(uuid "10110edb-b8a8-4357-b158-612b2f3df5be")
-		)
-		(instances
-			(project "Keyboard_LED_button"
-				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -8704,7 +8520,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "27ecb9fc-7d8f-420d-a349-84a07a31c06b")
-		(property "Reference" "C10"
+		(property "Reference" "C7"
 			(at 179.324 69.342 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8768,7 +8584,7 @@
 		(instances
 			(project "Keyboard_LED_button"
 				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "C10")
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -8867,7 +8683,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "29eb22dc-9466-45c3-b1d5-80be515bb5e9")
-		(property "Reference" "R4"
+		(property "Reference" "R2"
 			(at 135.382 133.604 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8929,7 +8745,7 @@
 		(instances
 			(project "Keyboard_LED_button"
 				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "R4")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -8937,7 +8753,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 226.06 100.33 0)
+		(at 224.79 100.33 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8947,7 +8763,7 @@
 		(dnp no)
 		(uuid "2e4e284f-e43d-4290-9712-7236844c5fd6")
 		(property "Reference" "#PWR04"
-			(at 226.06 104.14 0)
+			(at 224.79 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8958,7 +8774,7 @@
 			)
 		)
 		(property "Value" "+3.3V-PROT"
-			(at 221.996 95.758 0)
+			(at 220.726 95.758 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8969,7 +8785,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 226.06 100.33 0)
+			(at 224.79 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8980,7 +8796,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 226.06 100.33 0)
+			(at 224.79 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8991,7 +8807,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 226.06 100.33 0)
+			(at 224.79 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9095,96 +8911,6 @@
 		)
 	)
 	(symbol
-		(lib_id "noknok_KiCad_Symbol_Library:Castellated_Edge_5pin_Firmware")
-		(at 250.19 105.41 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "31af1f49-2c7b-4b83-bbb4-56632878c5ed")
-		(property "Reference" "J4"
-			(at 252.73 106.68 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Castellated_Edge_5pin_Firmware"
-			(at 234.188 116.332 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Chris_Library:Castellated_edge_pad_Firmware"
-			(at 250.19 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 250.19 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 250.19 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "c4af00bb-c3c1-436a-a9f3-5bffb6173f68")
-		)
-		(pin "4"
-			(uuid "43a585ec-9d72-4018-bc84-19042c150fa1")
-		)
-		(pin "5"
-			(uuid "74c85af6-7895-47ba-a136-35c1fc2a7d12")
-		)
-		(pin "1"
-			(uuid "8f3ee7c7-ba80-41e3-884c-4c74c3cf6404")
-		)
-		(pin "3"
-			(uuid "8a9d6a0b-fa53-42d4-96f2-9435794da584")
-		)
-		(instances
-			(project "Keyboard_LED_button"
-				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "J4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 67.31 66.04 0)
 		(unit 1)
@@ -9264,7 +8990,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 57.15 110.49 0)
+		(at 44.45 110.49 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9275,7 +9001,7 @@
 		(fields_autoplaced yes)
 		(uuid "388bb751-3a4f-4d79-9267-7b836b1e65e0")
 		(property "Reference" "#PWR06"
-			(at 57.15 116.84 0)
+			(at 44.45 116.84 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9286,7 +9012,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 57.15 115.57 0)
+			(at 44.45 115.57 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9296,7 +9022,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 57.15 110.49 0)
+			(at 44.45 110.49 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9307,7 +9033,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 57.15 110.49 0)
+			(at 44.45 110.49 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9318,7 +9044,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 57.15 110.49 0)
+			(at 44.45 110.49 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9581,7 +9307,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x04")
-		(at 49.53 102.87 180)
+		(at 36.83 102.87 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9591,7 +9317,7 @@
 		(dnp no)
 		(uuid "41edd98a-e7aa-4763-9fcb-392fdcd8ba86")
 		(property "Reference" "J1"
-			(at 50.546 94.996 0)
+			(at 37.846 94.996 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9602,7 +9328,7 @@
 			)
 		)
 		(property "Value" "JST 4 Pin Qwiic I2C Connector"
-			(at 46.228 87.376 90)
+			(at 33.528 87.376 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9613,7 +9339,7 @@
 			)
 		)
 		(property "Footprint" "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal"
-			(at 49.53 102.87 0)
+			(at 36.83 102.87 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9624,7 +9350,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 49.53 102.87 0)
+			(at 36.83 102.87 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9635,7 +9361,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 49.53 102.87 0)
+			(at 36.83 102.87 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9746,7 +9472,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 224.79 116.84 0)
+		(at 224.79 113.03 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9757,7 +9483,7 @@
 		(fields_autoplaced yes)
 		(uuid "53f4f10a-cc0a-439d-a85b-c3439cd10030")
 		(property "Reference" "#PWR01"
-			(at 224.79 123.19 0)
+			(at 224.79 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9768,7 +9494,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 224.79 121.92 0)
+			(at 224.79 118.11 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9778,7 +9504,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 224.79 116.84 0)
+			(at 224.79 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9789,7 +9515,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 224.79 116.84 0)
+			(at 224.79 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9800,7 +9526,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 224.79 116.84 0)
+			(at 224.79 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10067,82 +9793,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 36.83 156.21 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "65fe9ae8-be25-4e87-84cd-9a304d99ab33")
-		(property "Reference" "H2"
-			(at 39.37 154.9399 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole"
-			(at 39.37 157.4799 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
-			(at 36.83 156.21 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 36.83 156.21 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 36.83 156.21 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(instances
-			(project "Keyboard_LED_button"
-				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "H2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 80.01 66.04 90)
 		(unit 1)
@@ -10153,7 +9803,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "67245dcd-2574-48de-806f-fe6fe0866438")
-		(property "Reference" "R3"
+		(property "Reference" "R1"
 			(at 78.994 68.58 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10217,7 +9867,83 @@
 		(instances
 			(project "Keyboard_LED_button"
 				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "R3")
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "noknok:noknok_MountingHole")
+		(at 22.86 186.69 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6847f2a7-e34b-453d-9ae3-92d78aa8e427")
+		(property "Reference" "H1"
+			(at 25.4 185.4199 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "noknok_MountingHole"
+			(at 25.4 187.9599 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "noknok:noknok_MountingHole_2.5mm_M2.5"
+			(at 22.86 186.69 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 22.86 186.69 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "noknok standard M2.5 mounting hole (Ø2.5mm NPTH, no annular). Pairs with footprint noknok_MountingHole_2.5mm_M2.5. The plain second mounting hole; the first hole on the board carries the flashing pads (noknok_FlashPads_I2C-module)."
+			(at 22.86 186.69 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "Keyboard_LED_button"
+				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
+					(reference "H1")
 					(unit 1)
 				)
 			)
@@ -10383,6 +10109,84 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 207.01 115.57 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "87c20173-aab4-44f6-9ed1-784e66834ec2")
+		(property "Reference" "#PWR07"
+			(at 207.01 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V-PROT"
+			(at 200.914 111.506 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 207.01 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 207.01 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 207.01 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "80b648c5-6341-4fec-abb3-165006d57757")
+		)
+		(instances
+			(project "Keyboard_LED_button"
+				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
+					(reference "#PWR07")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 209.55 83.82 0)
 		(unit 1)
@@ -10541,7 +10345,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 223.52 144.78 0)
+		(at 229.87 135.89 0)
 		(mirror y)
 		(unit 1)
 		(body_style 1)
@@ -10553,7 +10357,7 @@
 		(fields_autoplaced yes)
 		(uuid "920ff107-62c8-4d4b-af89-832d174ab9ac")
 		(property "Reference" "SW1"
-			(at 223.52 137.16 0)
+			(at 229.87 128.27 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10563,7 +10367,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 223.52 139.7 0)
+			(at 229.87 130.81 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10573,7 +10377,7 @@
 			)
 		)
 		(property "Footprint" "Chris_Library:SW_Cherry_MX_1.00u_PCB_CHRIS"
-			(at 223.52 139.7 0)
+			(at 229.87 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10584,7 +10388,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 223.52 139.7 0)
+			(at 229.87 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10595,7 +10399,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 223.52 144.78 0)
+			(at 229.87 135.89 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10865,8 +10669,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 133.35 77.47 0)
+		(lib_id "Device:LED")
+		(at 199.39 125.73 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10874,31 +10678,30 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "9b6e8abc-471e-4a69-8a34-26a6ea85c5de")
-		(property "Reference" "R1"
-			(at 134.366 72.136 0)
+		(fields_autoplaced yes)
+		(uuid "9a9eda4e-02de-49fe-ad59-9c4ab88d5b83")
+		(property "Reference" "D4"
+			(at 197.8025 119.38 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "10k"
-			(at 134.366 74.676 0)
+		(property "Value" "LED"
+			(at 197.8025 121.92 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 131.572 77.47 90)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 199.39 125.73 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10909,7 +10712,98 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 77.47 0)
+			(at 199.39 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 199.39 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 199.39 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "dbdf9a91-a1ae-4ac2-891b-0008f94fe6c8")
+		)
+		(pin "2"
+			(uuid "9478a0f4-e054-4b43-a204-ac7dac3c9b83")
+		)
+		(instances
+			(project "Keyboard_LED_button"
+				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
+					(reference "D4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 207.01 120.65 0)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a258ab72-9fd4-4be5-8e59-d30240246420")
+		(property "Reference" "R5"
+			(at 204.724 122.428 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2k"
+			(at 204.724 118.364 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 205.232 120.65 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 207.01 120.65 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10920,7 +10814,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 133.35 77.47 0)
+			(at 207.01 120.65 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10930,16 +10824,16 @@
 				)
 			)
 		)
-		(pin "2"
-			(uuid "03b41e12-787d-4578-aef0-82e21b09e349")
-		)
 		(pin "1"
-			(uuid "4f4c8251-6682-4736-b227-8f5b16c5477d")
+			(uuid "4c5604fb-6b9a-414b-a387-d772d16aa70f")
+		)
+		(pin "2"
+			(uuid "6ee0aa4d-448f-4038-b243-cfde110ed098")
 		)
 		(instances
 			(project "Keyboard_LED_button"
 				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "R1")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -11024,8 +10918,9 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 36.83 151.13 0)
+		(lib_id "noknok:noknok_FlashPads_I2C-module")
+		(at 245.11 106.68 0)
+		(mirror x)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11033,10 +10928,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "afff642f-44de-4a86-8dae-eeb32fc5bc0e")
-		(property "Reference" "H1"
-			(at 39.37 149.8599 0)
+		(uuid "afcf730b-73bf-48aa-a77e-3c7c6b6b0a76")
+		(property "Reference" "J3"
+			(at 255.27 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11046,8 +10940,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 39.37 152.3999 0)
+		(property "Value" "noknok_FlashPads_I2C-module"
+			(at 229.362 112.522 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11057,8 +10951,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
-			(at 36.83 151.13 0)
+		(property "Footprint" "noknok:noknok_FlashPads_I2C-module_1x3_M2.5"
+			(at 245.11 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11069,7 +10963,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 36.83 151.13 0)
+			(at 245.11 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11079,8 +10973,8 @@
 				)
 			)
 		)
-		(property "Description" "Mounting Hole without connection"
-			(at 36.83 151.13 0)
+		(property "Description" "noknok pogo flashing interface for CH32V003 I2C modules (single-wire SWD). 3 pads: 1=GND, 2=SWIO, 3=VCC. NOTE: the footprint INCLUDES an M2.5 mounting hole that fixes the hole-to-pad spacing and acts as the pogo-clamp orientation key. Bottom-side pads (flip footprint to B.Cu). Place the hole >=3mm from the board edge."
+			(at 245.11 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11089,11 +10983,20 @@
 					(size 1.27 1.27)
 				)
 			)
+		)
+		(pin "1"
+			(uuid "35d30e93-b946-4e55-949f-cb94b1269c93")
+		)
+		(pin "3"
+			(uuid "62c86e41-6a52-472e-beed-57521ea4adaf")
+		)
+		(pin "2"
+			(uuid "9c8e34ee-2240-47f7-909b-e9915909f00a")
 		)
 		(instances
 			(project "Keyboard_LED_button"
 				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "H1")
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -11101,7 +11004,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x04")
-		(at 35.56 102.87 180)
+		(at 22.86 102.87 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11111,7 +11014,7 @@
 		(dnp no)
 		(uuid "ba4d8e5b-18d7-4a76-b910-41abef1489ba")
 		(property "Reference" "J2"
-			(at 36.576 94.996 0)
+			(at 23.876 94.996 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11122,7 +11025,7 @@
 			)
 		)
 		(property "Value" "JST 4 Pin Qwiic I2C Connector"
-			(at 32.258 87.376 90)
+			(at 19.558 87.376 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11133,7 +11036,7 @@
 			)
 		)
 		(property "Footprint" "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal"
-			(at 35.56 102.87 0)
+			(at 22.86 102.87 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11144,7 +11047,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 35.56 102.87 0)
+			(at 22.86 102.87 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11155,7 +11058,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 35.56 102.87 0)
+			(at 22.86 102.87 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11197,7 +11100,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "dd0f421f-91f8-493c-b823-21efcfd6b3b1")
-		(property "Reference" "R6"
+		(property "Reference" "R4"
 			(at 238.506 75.438 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11259,7 +11162,7 @@
 		(instances
 			(project "Keyboard_LED_button"
 				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "R6")
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -11662,7 +11565,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f479c832-f4f3-480e-ace8-37812acb3978")
-		(property "Reference" "R5"
+		(property "Reference" "R3"
 			(at 238.506 65.278 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11724,7 +11627,7 @@
 		(instances
 			(project "Keyboard_LED_button"
 				(path "/89ac1937-28eb-4c0f-a201-5c0292dd68d3"
-					(reference "R5")
+					(reference "R3")
 					(unit 1)
 				)
 			)
