@@ -1,6 +1,12 @@
 /*
- * noknok Keyboard Button Module Firmware  v2.1
+ * noknok Keyboard Button Module Firmware  v2.2
  * CH32V003F4U6 (QFN-20)  |  Stack: cnlohr/ch32fun
+ *
+ * v2.2: LED driver swapped to cnlohr's ch32fun ws2812b_dma_spi_led_driver.h.
+ *       The previous hand-rolled SPI/DMA driver produced a marginal waveform
+ *       that genuine-but-less-tolerant SK6812 lots misread (wrong colours on
+ *       ~13/20 of a batch). The library's clean waveform fixes it — same DMA,
+ *       no bit-bang. See the LED section below.
  *
  * ── Bootloader-hosted build (v2.0) ────────────────────────────────────────
  *   This application runs UNDER the shared noknok I2C bootloader
@@ -17,13 +23,11 @@
  *   PD4  Button (active-low, internal pull-up)
  *   PD1  SWIO (programming)
  *
- * ── SK6812 encoding ───────────────────────────────────────────────────────
- *   SPI @ 3 MHz (48 MHz / 16), 4 SPI bits per LED bit, 2 LED bits per byte.
- *   LED bit 1 → nibble 0b1110  H=999 ns, L=333 ns
- *   LED bit 0 → nibble 0b1000  H=333 ns, L=999 ns
- *   Wire order: G R B W  (32 bits = 16 SPI bytes)
- *   Reset: 30 × 0x00 bytes = 80 µs LOW at 3 MHz
- *   DMA buffer total: 46 bytes — fire and forget.
+ * ── SK6812 LED driver ─────────────────────────────────────────────────────
+ *   ch32fun extralibs/ws2812b_dma_spi_led_driver.h (cnlohr) — SPI1 + DMA1-Ch3
+ *   on PC6, wire order G,R,B (24 bits). Clean, glitch-free waveform via 16-bit
+ *   SPI transfers, HSCR high-speed mode, very-high DMA priority and a line-low
+ *   start. DMA (fire-and-forget) — never blocks the I2C / TIM2 interrupts.
  *
  * ── Enumeration ───────────────────────────────────────────────────────────
  *   Staging address : 0x7F
@@ -78,7 +82,7 @@
  * release tag. Reported on a GET_VERSION (0xB1) read. */
 #define PROTOCOL_VERSION 0x01
 #define FW_VERSION_MAJOR 2
-#define FW_VERSION_MINOR 1
+#define FW_VERSION_MINOR 2
 #define FW_VERSION_PATCH 0
 
 /* Bootloader handoff cell — top 16 B of RAM, reserved by app.ld (stack ends
@@ -200,91 +204,35 @@ static void build_version_response(void)
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
- * SK6812MINI-E — SPI1 + DMA1 Channel 3  (PC6 = SPI1_MOSI, no remap)
+ * SK6812MINI-E LED  —  cnlohr's proven SPI1 + DMA1-Ch3 driver (PC6 = SPI1_MOSI)
  *
- * SK6812MINI-E is RGB only (no W channel). Wire order: G, R, B (24 bits).
+ * Uses ch32fun's extralibs/ws2812b_dma_spi_led_driver.h. This replaced a
+ * hand-rolled SPI/DMA driver whose marginal waveform was misread by genuine-
+ * but-less-tolerant SK6812 lots (7/20 units tolerated it, 13/20 showed wrong
+ * colours). The library produces a clean, glitch-free waveform — 16-bit SPI
+ * transfers, HSCR high-speed mode, very-high DMA priority, and a line-low start
+ * — so every unit reads it correctly. Still DMA (no bit-bang), so it never
+ * blocks the I2C / TIM2 interrupts.
  *
- * Buffer layout  (42 bytes total):
- *   [0..11]  encoded LED data  (12 bytes, 2 LED bits per SPI byte)
- *   [12..41] reset pulse       (30 bytes of 0x00 = 80 µs LOW at 3 MHz)
- *
- * DMA flag: DMA_CGIF3 = 0x00000100 (clears all Ch3 flags)
+ * Wire order is G, R, B — the driver's default order, streamed MSB-first, so the
+ * colour word is packed 0x00GGRRBB. The driver owns DMA1_Channel3_IRQHandler.
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-#define SK_DATA_BYTES   12           /* 3 bytes × 4 SPI bytes each (GRB) */
-#define SK_RESET_BYTES  30
-#define SK_BUF_LEN      (SK_DATA_BYTES + SK_RESET_BYTES)
+#define WS2812DMA_IMPLEMENTATION
+#define DMALEDS 4                  /* must be divisible by 4; we drive LED 0 only */
+#include "ws2812b_dma_spi_led_driver.h"
 
-static uint8_t          sk_buf[SK_BUF_LEN];
-static volatile uint8_t sk_busy = 0;
+static volatile uint32_t led_color = 0;   /* 0x00GGRRBB for the single LED */
 
-void DMA1_Channel3_IRQHandler(void) __attribute__((interrupt));
-void DMA1_Channel3_IRQHandler(void)
-{
-    DMA1->INTFCR = DMA_CGIF3;   /* clear all Channel 3 interrupt flags */
-    sk_busy = 0;
-}
+uint32_t WS2812BLEDCallback(int ledno) { return (ledno == 0) ? led_color : 0; }
 
-static void sk6812_init(void)
-{
-    RCC->APB2PCENR |= RCC_APB2Periph_GPIOC | RCC_APB2Periph_SPI1;
-    RCC->AHBPCENR  |= RCC_AHBPeriph_DMA1;
+static void sk6812_init(void) { WS2812BDMAInit(); }
 
-    /* PC6 = SPI1_MOSI: AF push-pull, 50 MHz */
-    GPIOC->CFGLR &= ~(0xF << (6 * 4));
-    GPIOC->CFGLR |=  (0xB << (6 * 4));
-
-    /* SPI1: master, 8-bit, MSB-first, CPOL=0, CPHA=0, SW-NSS, 3 MHz (48/16) */
-    SPI1->CTLR1 = (1 << 2)    /* MSTR             */
-                | (3 << 3)    /* BR[2:0] = /16     */
-                | (1 << 8)    /* SSI               */
-                | (1 << 9)    /* SSM               */
-                | (1 << 6);   /* SPE               */
-    SPI1->CTLR2 = (1 << 1);   /* TXDMAEN           */
-
-    /* DMA1 Ch3 → SPI1_TX: mem→periph, 8-bit, memory-increment, TC interrupt */
-    DMA1_Channel3->PADDR = (uint32_t)&SPI1->DATAR;
-    DMA1_Channel3->MADDR = (uint32_t)sk_buf;
-    DMA1_Channel3->CFGR  = (1 << 4)    /* DIR: mem→periph  */
-                          | (1 << 7)    /* MINC             */
-                          | (1 << 1)    /* TCIE             */
-                          | (1 << 3)    /* TEIE             */
-                          | (1 << 12);  /* PL: medium       */
-
-    /* Pre-fill reset region with zeros (stays zero permanently) */
-    memset(sk_buf + SK_DATA_BYTES, 0x00, SK_RESET_BYTES);
-
-    NVIC_EnableIRQ(DMA1_Channel3_IRQn);
-}
-
-/*
- * Encode GRBW and kick off DMA. Non-blocking — returns immediately.
- * sk_busy is cleared by DMA1_Channel3_IRQHandler when transfer completes.
- */
+/* Set the LED colour and kick off the DMA frame. Non-blocking. */
 static void sk6812_write(uint8_t r, uint8_t g, uint8_t b)
 {
-    while (sk_busy);   /* wait for any in-flight transfer */
-
-    /* Encode: SK6812MINI-E wire order G, R, B (RGB only, no W) — MSB first.
-     * 2 LED bits packed per SPI byte (high nibble = first bit):
-     *   LED 1 → 0xE  (0b1110)
-     *   LED 0 → 0x8  (0b1000)
-     */
-    const uint8_t color[3] = {g, r, b};
-    uint8_t idx = 0;
-    for (int c = 0; c < 3; c++) {
-        for (int bit = 6; bit >= 0; bit -= 2) {
-            uint8_t hi = (color[c] >> (bit + 1)) & 1;
-            uint8_t lo = (color[c] >> bit)        & 1;
-            sk_buf[idx++] = (hi ? 0xE0 : 0x80) | (lo ? 0x0E : 0x08);
-        }
-    }
-
-    /* Reload and fire DMA */
-    sk_busy = 1;
-    DMA1_Channel3->CFGR &= ~(1 << 0);   /* disable to reload CNTR */
-    DMA1_Channel3->CNTR  = SK_BUF_LEN;
-    DMA1_Channel3->CFGR |=  (1 << 0);   /* enable → transfer starts */
+    led_color = ((uint32_t)g << 16) | ((uint32_t)r << 8) | b;
+    WS2812BDMAStart(1);
 }
 
 
@@ -529,7 +477,7 @@ int main(void)
 
     /* Startup: brief white flash — module is alive, I2C still off */
     sk6812_write(20, 20, 20);
-    while (sk_busy);
+    while (WS2812BLEDInUse);
     Delay_Ms(200);
     sk6812_write(0, 0, 0);
 
@@ -574,12 +522,12 @@ int main(void)
             }
 
             /* Turn off startup flash after 400 ms */
-            if (flash_off_ms && now >= flash_off_ms && !sk_busy) {
+            if (flash_off_ms && now >= flash_off_ms && !WS2812BLEDInUse) {
                 flash_off_ms = 0;
                 sk6812_write(0, 0, 0);
             }
 
-            if (led_update_pending && !sk_busy && !flash_off_ms) {
+            if (led_update_pending && !WS2812BLEDInUse && !flash_off_ms) {
                 led_update_pending = 0;
                 sk6812_write(led_r, led_g, led_b);
             }
