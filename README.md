@@ -50,7 +50,7 @@ Typical use cases:
 
 ### Version read (Pico ← Module)
 
-`GET_VERSION` (`0xB1`) is a **noknok ecosystem-standard** command (the `0xB0`–`0xBF` range is reserved for standard commands across every module). Write `0xB1`, then read **4 bytes**: `[PROTOCOL_VERSION, FW_MAJOR, FW_MINOR, FW_PATCH]` = `[0x01, 2, 1, 0]`. Lets the Conductor compare the installed version against the version required by the product manifest. **→ Full spec:** [Ecosystem / software / readme.md §5](https://github.com/buildwithnoknok/Ecosystem/blob/main/software/readme.md#5-standard-system-commands)
+`GET_VERSION` (`0xB1`) is a **noknok ecosystem-standard** command (the `0xB0`–`0xBF` range is reserved for standard commands across every module). Write `0xB1`, then read **4 bytes**: `[PROTOCOL_VERSION, FW_MAJOR, FW_MINOR, FW_PATCH]` = `[0x01, 2, 2, 0]`. Lets the Conductor compare the installed version against the version required by the product manifest. **→ Full spec:** [Ecosystem / software / readme.md §5](https://github.com/buildwithnoknok/Ecosystem/blob/main/software/readme.md#5-standard-system-commands)
 
 ### Status read (Pico ← Module)
 
@@ -131,7 +131,7 @@ kb.reset_count()
 
 ## Firmware
 
-**v2.1 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
+**v2.2 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
 
 Flash map (16 KB):
 
@@ -162,8 +162,34 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 
 | Metric | Value |
 |--------|-------|
-| Firmware version | v2.1 (bootloader‑hosted) |
-| Application size | ~2.7 KB (of 11 KB app region) |
+| Firmware version | v2.2 (bootloader‑hosted) |
+| Application size | ~3.0 KB (of 11 KB app region) |
+
+---
+
+## Changelog
+
+### v2.2.0 — SK6812 LED driver fix
+Replaced the hand-rolled SPI+DMA SK6812 driver with cnlohr's proven
+[`ws2812b_dma_spi_led_driver.h`](https://github.com/cnlohr/ch32fun/blob/master/extralibs/ws2812b_dma_spi_led_driver.h)
+(ch32fun `extralibs`). The old driver produced a **marginal waveform** that
+genuine-but-less-tolerant SK6812 lots misread — one batch showed wrong colours
+(a spurious green channel) on ~13 of 20 units. This was **initially misdiagnosed
+as bad/counterfeit LEDs; the LEDs are genuine OPSCO** — the fault was our driver.
+The library produces a clean, glitch-free waveform. Four concrete differences vs.
+the old driver:
+
+- **16-bit SPI** transfers (was 8-bit) — cleaner framing, fewer inter-word gaps
+- **`SPI1->HSCR = 1`** high-speed read mode (was not set)
+- **`DMA_Priority_VeryHigh`** (was medium) — prevents inter-byte gaps under bus contention
+- **`SPI1->DATAR = 0`** to force the data line low before the first frame (kills the start-of-frame glitch)
+
+Still DMA (no bit-bang), so it never blocks the I²C / TIM2 interrupts. Wire order
+(G, R, B) and the I²C command set are unchanged, so it's a drop-in OTA update.
+
+### v2.1.0 — bootloader-hosted
+Offset-linked at `0x1000` to run under the shared noknok I²C bootloader, enabling
+I²C OTA firmware updates. Added the `GET_VERSION` (`0xB1`) standard command.
 
 ---
 
@@ -172,7 +198,7 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 | Area | Status |
 |------|--------|
 | Hardware | v1.0 |
-| Firmware | **v2.1 — complete (bootloader‑hosted, I²C OTA bench‑proven)** |
+| Firmware | **v2.2 — complete (bootloader‑hosted, I²C OTA bench‑proven)** |
 | Python library | **complete** (in [Ecosystem repo](https://github.com/buildwithnoknok/Ecosystem/tree/main/software/pico)) |
 | Documentation | **complete** |
 
