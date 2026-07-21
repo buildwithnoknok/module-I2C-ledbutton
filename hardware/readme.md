@@ -4,7 +4,7 @@ Hardware design files for the noknok LED Button module (CH32V003F4U6 — I2C tac
 
 - KiCad project: `kicad/Keyboard_LED_button.*`
 - Schematic (PDF): `Schematics_LEDButton_V2_20260616.pdf`
-- BOM: *not yet exported — pending, see note below*
+- BOM: `module_I2C-LEDButton.xls`
 - Board renders: `module-I2C-ledbutton-front.png`, `module-I2C-ledbutton-back.png` *(pre-V2 renders — pending re-export)*
 
 Hardware is licensed CC BY-SA 4.0 (see `../LICENSE-hardware`). Connector, flashing and mounting standards follow the [noknok Ecosystem guidelines](https://github.com/buildwithnoknok/Ecosystem) (electrical + mechanical).
@@ -22,4 +22,4 @@ Hardware is licensed CC BY-SA 4.0 (see `../LICENSE-hardware`). Connector, flashi
 - **Remaining resistors renumbered** after the pull-ups were removed (values unchanged): VDD series R3→**R1** (10 Ω, no spike issue), LED current R4→**R2** (300 Ω), boost feedback divider R5/R6→**R3**/**R4** (25 kΩ / 10 kΩ). New status-LED resistor is **R5** (2.2 kΩ, see above).
 - D1 (SK6812MINI-E RGB LED, payload), D2 (protection Zener) and D3 (boost-converter Schottky) are unchanged from v1.1.
 
-**Gap vs. Knob/Buzzer V2 docs:** no BOM (`.xls`) has been exported for this board yet, and the board renders are still the pre-V2 photos. Not urgent, but worth doing before this module goes into a production run.
+**Gap vs. Knob/Buzzer V2 docs:** the board renders are still the pre-V2 photos, pending new production units.
