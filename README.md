@@ -125,7 +125,8 @@ kb.reset_count()
 | Button pin | PD4 (active LOW) |
 | I²C SDA | PC1 |
 | I²C SCL | PC2 |
-| Flash header | J4 — 5‑pin (GND, SWIO, RST, VCC) |
+| Flash header | J3 — 3-pad pogo (GND, SWIO, VCC), noknok M2.5-keyed footprint. SWIO/PD1 also carries the status LED (D4, active LOW). |
+| Hardware version | v2.0 |
 
 ---
 
@@ -169,6 +170,9 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 
 ## Changelog
 
+### Hardware v2.0 — status LED, pogo flash pads, no on-board pull-ups
+Status LED on PD1/SWIO, castellated edges replaced with 3-pad pogo flashing pads (J3), on-board I²C pull-ups removed (host-only now). Full change record: [hardware/readme.md](hardware/readme.md#hardware-change-record).
+
 ### v2.2.0 — SK6812 LED driver fix
 Replaced the hand-rolled SPI+DMA SK6812 driver with cnlohr's proven
 [`ws2812b_dma_spi_led_driver.h`](https://github.com/cnlohr/ch32fun/blob/master/extralibs/ws2812b_dma_spi_led_driver.h)
@@ -197,7 +201,7 @@ I²C OTA firmware updates. Added the `GET_VERSION` (`0xB1`) standard command.
 
 | Area | Status |
 |------|--------|
-| Hardware | v1.0 |
+| Hardware | v2.0 complete |
 | Firmware | **v2.2 — complete (bootloader‑hosted, I²C OTA bench‑proven)** |
 | Python library | **complete** (in [Ecosystem repo](https://github.com/buildwithnoknok/Ecosystem/tree/main/software/pico)) |
 | Documentation | **complete** |
