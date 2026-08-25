@@ -3,7 +3,7 @@
 Hardware design files for the noknok LED Button module (CH32V003F4U6 — I2C tactile button with RGB LED backlight).
 
 - KiCad project: `kicad/Keyboard_LED_button.*`
-- Schematic (PDF): `Schematics_LEDButton_V2_20260616.pdf`
+- Schematic (PDF): `module-I2C-LEDButton_Schematics.pdf`
 - BOM: `module_I2C-LEDButton.xls`
 - Board renders: `module-I2C-ledbutton-front.png`, `module-I2C-ledbutton-back.png` *(pre-V2 renders — pending re-export)*
 
