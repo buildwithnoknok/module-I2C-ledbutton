@@ -119,7 +119,7 @@ kb.reset_count()
 | MCU | CH32V003F4U6 (QFN‑20, RISC‑V, 48 MHz) |
 | LED | SK6812MINI-E (RGB, SPI-driven) |
 | Button | Tactile switch, active LOW, internal pull-up |
-| Connector | JST SH 4‑pin (Qwiic / Stemma QT compatible) |
+| Connector | JST SH 4‑pin (Qwiic / STEMMA QT compatible) |
 | Supply voltage | 3.3V via I²C connector |
 | LED data pin | PC6 (SPI1 MOSI, DMA-driven) |
 | Button pin | PD4 (active LOW) |
@@ -212,6 +212,16 @@ I²C OTA firmware updates. Added the `GET_VERSION` (`0xB1`) standard command.
 
 - Firmware / code: MIT — see [LICENSE](LICENSE).
 - Hardware (schematics, PCB layout, fab files): CC BY-SA 4.0 — see [LICENSE-hardware](LICENSE-hardware).
+
+## Trademarks
+
+**noknok** is a registered trademark in Switzerland (Swissreg 1300007033).
+
+Qwiic is a registered trademark of SparkFun Electronics, Inc. STEMMA QT is a
+trademark of Adafruit Industries, LLC. Both are named here only to state
+connector compatibility - noknok is not affiliated with, endorsed by, or
+sponsored by either company.
+---
 
 ---
 
