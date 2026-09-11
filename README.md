@@ -163,8 +163,8 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 
 | Metric | Value |
 |--------|-------|
-| Firmware version | v2.2 (bootloader‑hosted) |
-| Application size | ~3.0 KB (of 11 KB app region) |
+| Firmware version | v2.4.1 (bootloader‑hosted, app base `0x1400`) |
+| Application size | 3144 B (of the 10 KB app region) |
 
 ---
 
@@ -172,6 +172,9 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 
 ### Hardware v2.0 — status LED, pogo flash pads, no on-board pull-ups
 Status LED on PD1/SWIO, castellated edges replaced with 3-pad pogo flashing pads (J3), on-board I²C pull-ups removed (host-only now). Full change record: [hardware/readme.md](hardware/readme.md#hardware-change-record).
+
+### v2.4.1 — version bump only (firmware-index bring-up)
+No functional change. Cut purely to give the new firmware-index OTA path a real installed-vs-current delta to exercise end to end (resolve → bootloader gate → fetch → flash → verify). Identical to v2.4.0 apart from the `GET_VERSION` patch byte. Ships alongside the first [`firmware/index.json`](firmware/index.json), which is how the brain now discovers the current firmware for this module — see [Ecosystem / software / firmware-index.md](https://github.com/buildwithnoknok/Ecosystem/blob/main/software/firmware-index.md).
 
 ### v2.4.0 — app base 0x1400 (bootloader layout 2)
 Relinked at the `0x1400` flash offset (bootloader **layout 2**: 1 KB stage-0 + 4 KB stage-1 below the app; was `0x1000`). Firmware behaviour unchanged. **Not compatible with the legacy monolithic bootloader or a layout-1 stage-1** — such a module gets stage-0 + stage-1 v1.1.0 over SWD first, then this app over I²C. See [module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader).

@@ -1,7 +1,12 @@
 /*
- * noknok Keyboard Button Module Firmware  v2.3
+ * noknok Keyboard Button Module Firmware  v2.4.1
  * CH32V003F4U6 (QFN-20)  |  Stack: cnlohr/ch32fun
  *
+ * v2.4.1: version bump only — no functional change. Cut to give the
+ *   firmware-index OTA path (firmware/index.json) a real installed-vs-current
+ *   delta to exercise on the bench. Byte-for-byte identical to v2.4.0 apart
+ *   from the GET_VERSION patch byte.
+ * v2.4.0: relinked at the 0x1400 flash offset (bootloader layout 2).
  * v2.3: DEV-31 hardening C — independent watchdog + boot-attempt handshake
  *   with stage-1 (clears the counter once an I2C address is assigned).
  * v2.2: LED driver swapped to cnlohr's ch32fun ws2812b_dma_spi_led_driver.h.
@@ -85,7 +90,7 @@
 #define PROTOCOL_VERSION 0x01
 #define FW_VERSION_MAJOR 2
 #define FW_VERSION_MINOR 4
-#define FW_VERSION_PATCH 0
+#define FW_VERSION_PATCH 1
 
 /* Bootloader handoff cell — top 16 B of RAM, reserved by app.ld (stack ends
  * below it). Writing this magic then warm-resetting drops the module into the
