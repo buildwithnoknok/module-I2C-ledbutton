@@ -132,7 +132,7 @@ kb.reset_count()
 
 ## Firmware
 
-**v2.2 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
+**v2.3 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
 
 Flash map (16 KB):
 
@@ -172,6 +172,9 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 
 ### Hardware v2.0 — status LED, pogo flash pads, no on-board pull-ups
 Status LED on PD1/SWIO, castellated edges replaced with 3-pad pogo flashing pads (J3), on-board I²C pull-ups removed (host-only now). Full change record: [hardware/readme.md](hardware/readme.md#hardware-change-record).
+
+### v2.3.0 — watchdog + boot-health handshake (DEV-31)
+Runs the independent watchdog (~2 s, kicked every main-loop pass) and writes `0` to `0x200007F8` the moment its I²C address is assigned — the app-health handshake with the stage-1 bootloader. Stage-1 counts watchdog resets and parks the module (error 7, rescued by the Conductor by UID) after three in a row, instead of booting a broken app forever. Contract: [Ecosystem / software / bootloader-update.md §3](https://github.com/buildwithnoknok/Ecosystem/blob/main/software/bootloader-update.md). No protocol or command change.
 
 ### v2.2.0 — SK6812 LED driver fix
 Replaced the hand-rolled SPI+DMA SK6812 driver with cnlohr's proven
