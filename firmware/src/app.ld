@@ -1,11 +1,11 @@
 /* noknok LED Button application linker — CH32V003
  *
- * The app runs UNDER the noknok I2C bootloader, which owns the low 4 KB of flash.
- * This script links the application at the 0x1000 offset so the bootloader can
- * `jr 0x1000` straight onto the app's InterruptVector (= "j handle_reset").
+ * The app runs UNDER the noknok I2C bootloader, which owns the low 5 KB of flash (1 KB frozen stage-0 + 4 KB stage-1).
+ * This script links the application at the 0x1400 offset so the bootloader can
+ * `jr 0x1400` straight onto the app's InterruptVector (= "j handle_reset").
  *
  * Flash map (16 KB total):
- *   0x0000_0000  bootloader   4 KB  (separate binary, SWD-flashed once)
+ *   0x0000_0000  bootloader   5 KB  (stage-0 + stage-1, separate binaries, SWD-flashed once)
  *   0x0000_1000  application  this image (linked here, flashed over I2C)
  *   0x0000_3C00  metadata     last 1 KB page  {magic, app_len, app_crc32}
  *
@@ -19,7 +19,7 @@ ENTRY( InterruptVector )
 
 MEMORY
 {
-	FLASH (rx) : ORIGIN = 0x00001000, LENGTH = 0x2C00   /* app: 11 KB, below metadata page */
+	FLASH (rx) : ORIGIN = 0x00001400, LENGTH = 0x2800   /* app: 10 KB, below metadata page (layout 2: stage-0 1 KB + stage-1 4 KB below) */
 	RAM (xrw)  : ORIGIN = 0x20000000, LENGTH = 2032     /* 2 KB - 16 B (handoff @ 0x200007F0) */
 }
 

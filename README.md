@@ -132,17 +132,17 @@ kb.reset_count()
 
 ## Firmware
 
-**v2.3 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
+**v2.4 runs under the shared noknok I²C bootloader** ([module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader)), so the module can be re‑flashed **over the I²C bus** — no SWDIO cable needed in the field.
 
 Flash map (16 KB):
 
 | Region | Address | Written by |
 |--------|---------|-----------|
-| Bootloader (4 KB) | `0x0000` | SWD, **once** at manufacture |
-| Application (this firmware) | `0x1000` | I²C OTA |
+| Bootloader — stage-0 (1 KB, frozen) + stage-1 (4 KB, OTA-updatable) | `0x0000` | SWD, **once** at manufacture |
+| Application (this firmware) | `0x1400` | I²C OTA |
 | Metadata (validity marker) | `0x3FC0` | I²C OTA |
 
-The application is linked at the `0x1000` offset (`app.ld`) and reserves the top 16 bytes of RAM for the bootloader handoff cell. Command `0xB0` drops the running module back into the bootloader for an update.
+The application is linked at the `0x1400` offset (`app.ld`, bootloader layout 2) and reserves the top 16 bytes of RAM for the bootloader handoff cell. Command `0xB0` drops the running module back into the bootloader for an update.
 
 ### Build
 
@@ -173,6 +173,9 @@ make build   # compile the offset-linked application -> keyboard_firmware.bin
 ### Hardware v2.0 — status LED, pogo flash pads, no on-board pull-ups
 Status LED on PD1/SWIO, castellated edges replaced with 3-pad pogo flashing pads (J3), on-board I²C pull-ups removed (host-only now). Full change record: [hardware/readme.md](hardware/readme.md#hardware-change-record).
 
+### v2.4.0 — app base 0x1400 (bootloader layout 2)
+Relinked at the `0x1400` flash offset (bootloader **layout 2**: 1 KB stage-0 + 4 KB stage-1 below the app; was `0x1000`). Firmware behaviour unchanged. **Not compatible with the legacy monolithic bootloader or a layout-1 stage-1** — such a module gets stage-0 + stage-1 v1.1.0 over SWD first, then this app over I²C. See [module-I2C-bootloader](https://github.com/buildwithnoknok/module-I2C-bootloader).
+
 ### v2.3.0 — watchdog + boot-health handshake (DEV-31)
 Runs the independent watchdog (~2 s, kicked every main-loop pass) and writes `0` to `0x200007F8` the moment its I²C address is assigned — the app-health handshake with the stage-1 bootloader. Stage-1 counts watchdog resets and parks the module (error 7, rescued by the Conductor by UID) after three in a row, instead of booting a broken app forever. Contract: [Ecosystem / software / bootloader-update.md §3](https://github.com/buildwithnoknok/Ecosystem/blob/main/software/bootloader-update.md). No protocol or command change.
 
@@ -195,7 +198,7 @@ Still DMA (no bit-bang), so it never blocks the I²C / TIM2 interrupts. Wire ord
 (G, R, B) and the I²C command set are unchanged, so it's a drop-in OTA update.
 
 ### v2.1.0 — bootloader-hosted
-Offset-linked at `0x1000` to run under the shared noknok I²C bootloader, enabling
+Offset-linked at `0x1400` to run under the shared noknok I²C bootloader, enabling
 I²C OTA firmware updates. Added the `GET_VERSION` (`0xB1`) standard command.
 
 ---

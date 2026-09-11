@@ -12,7 +12,7 @@
  *
  * ── Bootloader-hosted build (v2.0) ────────────────────────────────────────
  *   This application runs UNDER the shared noknok I2C bootloader
- *   (module-I2C-bootloader). It is linked at the 0x1000 flash offset (app.ld)
+ *   (module-I2C-bootloader). It is linked at the 0x1400 flash offset (app.ld)
  *   and reserves the top 16 bytes of RAM for the bootloader handoff cell at
  *   0x200007F0. Command 0xB0 drops the running module back into the bootloader
  *   so the Pico can re-flash it over I2C — no SWDIO cable. The bootloader is a
@@ -84,7 +84,7 @@
  * release tag. Reported on a GET_VERSION (0xB1) read. */
 #define PROTOCOL_VERSION 0x01
 #define FW_VERSION_MAJOR 2
-#define FW_VERSION_MINOR 3
+#define FW_VERSION_MINOR 4
 #define FW_VERSION_PATCH 0
 
 /* Bootloader handoff cell — top 16 B of RAM, reserved by app.ld (stack ends
